@@ -24,7 +24,7 @@ RUN touch /sbin/init \
 		sqlite3  \
 		libdbi-perl \ 
 		libdbd-sqlite3-perl \
-		cpanminus
+		cpanminus \
 	&& cpanm Net::WebSocket::Server \
 	&& cpanm JSON \
 	&& LWP::Simple \
