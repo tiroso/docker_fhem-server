@@ -25,9 +25,9 @@ RUN touch /sbin/init \
 		libdbi-perl \ 
 		libdbd-sqlite3-perl \
 		cpanminus \
+		libwww-perl\
 	&& cpanm Net::WebSocket::Server \
 	&& cpanm JSON \
-	&& LWP::Simple \
 	&& SOAP::Lite \
 	&& XML::Parser::Lite \
 	&& wget -qO - https://debian.fhem.de/archive.key | apt-key add -  \
