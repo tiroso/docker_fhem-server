@@ -1,7 +1,7 @@
 <h1>docker_fhem-server</h1>
 <h2>Create Image</h2>
 <p>
-  <code>docker build https://github.com/tiroso/docker.git#master:fhem-server --tag tiroso/fhem-server</code>
+  <code>docker build https://github.com/tiroso/docker_fhem-server.git#master --tag tiroso/fhem-server</code>
 </p>
 <i>Image with configDB and DBLog</i>
 <h2>Create Container</h2>
