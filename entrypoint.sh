@@ -12,7 +12,7 @@ mv /opt/fhemorigin/* /opt/fhem;
 rm /opt/fhemorigin -R;
 echo 'define InstallRoutine notify global:INITIALIZED sleep 1;;delete InstallRoutine;;save;;update;;sleep 1;;shutdown' >> /opt/fhem/fhem.cfg;
 perl fhem.pl -d fhem.cfg | tee /opt/fhem/log/fhem_init_start.log;
-sed -i 's/attr global logfile.*$/attr global logfile ./log/fhem-%Y-%m.log/' /opt/fhem/fhem.cfg
+
 fi;
 
 
