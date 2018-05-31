@@ -24,7 +24,12 @@ RUN touch /sbin/init \
 		sqlite3  \
 		libdbi-perl \ 
 		libdbd-sqlite3-perl \
-		libwww-perl libsoap-lite-perl libxml-parser-perl \
+		cpanminus
+	&& cpanm Net::WebSocket::Server \
+	&& cpanm JSON \
+	&& LWP::Simple \
+	&& SOAP::Lite \
+	&& XML::Parser::Lite \
 	&& wget -qO - https://debian.fhem.de/archive.key | apt-key add -  \
 	&& echo "deb http://debian.fhem.de/nightly/ /" | tee -a /etc/apt/sources.list.d/fhem.list \
 	&& apt-get update \
