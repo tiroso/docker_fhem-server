@@ -30,6 +30,7 @@ RUN touch /sbin/init \
 		libxml-parser-perl \
 	&& cpanm Net::WebSocket::Server \
 	&& cpanm JSON \
+	&& cpanm XML::Parser::Lite \
 	&& wget -qO - https://debian.fhem.de/archive.key | apt-key add -  \
 	&& echo "deb http://debian.fhem.de/nightly/ /" | tee -a /etc/apt/sources.list.d/fhem.list \
 	&& apt-get update \
