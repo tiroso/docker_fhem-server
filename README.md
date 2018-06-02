@@ -8,12 +8,12 @@
 <h2>Create Container</h2>
 <h4>Without persistent Data</h4>
 <p>
-  <code>docker run --restart always -d --name fhem-server -h fhem-server --publish "8083:8083" tiroso/fhem-server:v5.8 (configdb)</code><br>
+  <code>docker run --restart always -d --name fhem-server -h fhem-server "TZ=Europe/Berlin" --publish "8083:8083" tiroso/fhem-server:v5.8 (configdb)</code><br>
 </p>
 <h4>With persistent Data</h4>
 <p>
   <code>docker volume create fhem-server</code><br>
-  <code>docker run --restart always -d --name fhem-server -h fhem-server -v fhem-server:/opt/fhem --publish "8083:8083" tiroso/fhem-server:v5.8 (configdb)</code><br>
+  <code>docker run --restart always -d --name fhem-server -h fhem-server -v fhem-server:/opt/fhem -e "TZ=Europe/Berlin" --publish "8083:8083" tiroso/fhem-server:v5.8 (configdb)</code><br>
 </p>
 <h2>Backup FHEM Server</h2>
 <p>First you have to create a backup folder:<br>
