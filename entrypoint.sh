@@ -21,6 +21,10 @@ if [ "$1" = "configdb" ];
 then 
 echo "Starte FHEM - configDB";
 perl fhem.pl configDB;
+elif [ "$1" = "sonos" ];
+then 
+echo "Starte FHEM - Sonos";
+perl /opt/fhem/FHEM/00_SONOS.pm 4711 1 1;
 else
 echo "Starte FHEM";
 perl fhem.pl fhem.cfg;
