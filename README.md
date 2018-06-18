@@ -1,12 +1,12 @@
 <h1>docker_fhem-server</h1>
 <h2>Create Image</h2>
 <p>
-  <code>docker build https://github.com/tiroso/docker_fhem-server.git#v5.8 --tag tiroso/fhem-server:v5.8 --tag tiroso/fhem-server:latest</code> Build your own
+  <code>docker build https://github.com/tiroso/docker_fhem-server.git#v5.8 --tag tiroso/fhem-server:v5.8 --tag tiroso/fhem-server:latest</code>
 </p>
 <h2>Pull Image</h2>
 <p>
-  I've compiled this Image on an amd64 and an arm32v6 (Raspberry Pi). Also you can pull "amd64" or "arm32v6"
-  <code>docker pull tiroso/fhem-server:<arch>-v5.8</code> Pull from my Docker Hub
+  I've compiled this Image on an amd64 and an arm32v6 (Raspberry Pi). Also you can pull "amd64" or "arm32v6"<br>
+  <code>docker pull tiroso/fhem-server:<arch>-v5.8</code>
 </p>
 <i>Image with configDB and DBLog</i>
 <h2>Create Container</h2>
