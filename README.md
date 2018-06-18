@@ -6,7 +6,7 @@
 <h2>Pull Image</h2>
 <p>
   I've compiled this Image on an amd64 and an arm32v6 (Raspberry Pi). Also you can pull "amd64" or "arm32v6"<br>
-  <code>docker pull tiroso/fhem-server:<arch>-v5.8</code>
+  <code>docker pull tiroso/fhem-server:&lt;arch&gt;-v5.8</code>
 </p>
 <i>Image with configDB and DBLog</i>
 <h2>Create Container</h2>
