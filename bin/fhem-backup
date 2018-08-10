@@ -15,11 +15,16 @@ if [ -z "$FILENAME" ]; then
     export FILENAME="fhem-backup.tar.bz2"
 fi
 
-
-echo Start Backup from $FHEMPATH to $BACKUPPATH
-echo Backup File $FILENAME
+echo +--------------------------------------------------+
+echo + Start Backup 
+echo + - from:        ${FHEMPATH}
+echo + - to:          ${BACKUPPATH}
+echo + - Backup File: ${FILENAME}
+echo +--------------------------------------------------+
+echo ... Please wait
 
 tar -cjf /backup/$FILENAME -C /opt/fhem ./
 
-echo Export done
-echo You can delete this container if you did not set --rm
+echo +--------------------------------------------------+
+echo + Finished Backup - Thanks for use
+echo +--------------------------------------------------+
