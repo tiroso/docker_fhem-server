@@ -30,6 +30,7 @@ RUN touch /sbin/init \
 		libsoap-lite-perl \
 		libxml-parser-perl \
 		libxml-parser-lite-perl \
+		libnet-telnet-perl \
 	&& cpanm Net::WebSocket::Server \
 	&& cpanm JSON \
 	&& cpanm XML::Parser::Lite \
