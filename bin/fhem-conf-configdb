@@ -17,21 +17,21 @@ echo "+ - Press Enter to set the default Values"
 echo "+--------------------------------------------------+"
 
 if [ -z "${DBCONNECTION}" ]; then
-  read -p "DB Connection String \(SQLite:dbname=/opt/fhem/configDB.db\): " DBCONNECTION
+  read -p "DB Connection String (SQLite:dbname=/opt/fhem/configDB.db): " DBCONNECTION
 fi
 if [ -z "${DBCONNECTION}" ]; then
   export DBCONNECTION="SQLite:dbname=/opt/fhem/configDB.db"
 fi
 
 if [ -z "${DBUSER}" ]; then
-  read -p "DB User \(empty\): " DBUSER
+  read -p "DB User (empty): " DBUSER
 fi
 if [ -z "${DBUSER}" ]; then
   export DBUSER=""
 fi
 
 if [ -z "${DBPASSWORD}" ]; then
-  read -sp "DB Password \(empty\): " DBPASSWORD
+  read -sp "DB Password (empty): " DBPASSWORD
 fi
 if [ -z "${DBPASSWORD}" ]; then
   export DBPASSWORD=""
