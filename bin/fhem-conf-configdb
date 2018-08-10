@@ -42,6 +42,5 @@ echo "%dbconfig= \(" > ${FHEMPATH}/${FILEPATH}
 echo "	connection =\> \"SQLite:dbname=/opt/fhem/configDB.db\"," >> ${FHEMPATH}/${FILEPATH}
 echo "	user =\> \"\"," >> ${FHEMPATH}/${FILEPATH}
 echo "	password =\> \"\"" >> ${FHEMPATH}/${FILEPATH}
-echo "\)" >> ${FHEMPATH}/${FILEPATH}
 
 cat ${FHEMPATH}/${FILEPATH}
