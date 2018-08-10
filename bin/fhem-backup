@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#
+# Backup Script for FHEM
+#
+
+if [ "$DEBUG" == "1" ]; then
+    set -x
+fi
+
+export FHEMPATH="/opt/fhem"
+export BACKUPPATH="/backup"
+
+if [ -z "$FILENAME" ]; then
+    export FILENAME="fhem-backup.tar.bz2"
+fi
+
+
+echo Start Backup from $FHEMPATH to $BACKUPPATH
+echo Backup File $FILENAME
+
+tar -cjf /backup/backup.tar.bz2 -C /opt/fhem ./
+
+echo Export done
+echo You can delete this container if you did not set --rm
