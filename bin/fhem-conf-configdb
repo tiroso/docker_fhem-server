@@ -1,0 +1,47 @@
+#!/bin/bash
+
+#
+# Restore Script for FHEM
+#
+
+if [ "$DEBUG" == "1" ]; then
+    set -x
+fi
+
+export FHEMPATH="/opt/fhem"
+export FILEPATH="configDB.conf"
+
+echo "+--------------------------------------------------+"
+echo "+ Creating ${FHEMPATH}/${FILEPATH}"
+echo "+ - Press Enter to set the default Values
+echo "+--------------------------------------------------+"
+
+if [ -z "${DBCONNECTION}" ]; then
+  read -p "DB Connection String (SQLite:dbname=/opt/fhem/configDB.db): " DBCONNECTION
+fi
+if [ -z "${DBCONNECTION}" ]; then
+  export DBCONNECTION="SQLite:dbname=/opt/fhem/configDB.db"
+fi
+
+if [ -z "${DBUSER}" ]; then
+  read -p "DB User (empty): " DBUSER
+fi
+if [ -z "${DBUSER}" ]; then
+  export DBUSER=""
+fi
+
+if [ -z "${DBPASSWORD}" ]; then
+  read -sp "DB Password (empty): " DBPASSWORD
+fi
+if [ -z "${DBPASSWORD}" ]; then
+  export DBPASSWORD=""
+fi
+
+echo > ${FHEMPATH}/${FILEPATH}
+echo "%dbconfig= (" > ${FHEMPATH}/${FILEPATH}
+echo "	connection => \"SQLite:dbname=/opt/fhem/configDB.db\"," >> ${FHEMPATH}/${FILEPATH}
+echo "	user => \"\"," >> ${FHEMPATH}/${FILEPATH}
+echo "	password => \"\"" >> ${FHEMPATH}/${FILEPATH}
+echo ");" >> ${FHEMPATH}/${FILEPATH}
+
+cat ${FHEMPATH}/${FILEPATH}
