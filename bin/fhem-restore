@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Backup Script for FHEM
+# Restore Script for FHEM
 #
 
 if [ "$DEBUG" == "1" ]; then
