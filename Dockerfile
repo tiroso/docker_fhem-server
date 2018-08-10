@@ -53,28 +53,13 @@ RUN pkill -f "fhem.pl" \
 	&& apt-get autoremove -y  \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 	
-WORKDIR "/opt/fhem"
-#COPY start.sh File to Image
-COPY entrypoint.sh /entrypoint.sh
-# Create /opt/fhem/configDB.conf
 COPY configDB.conf /opt/fhem/configDB.conf
-# Create /opt/fhem/logDB.conf
 COPY logDB.conf /opt/fhem/logDB.conf
 
-RUN echo "pragma auto_vacuum=2;" | sqlite3 /opt/fhem/configDB.db \
-    && echo "CREATE TABLE 'history' (TIMESTAMP TIMESTAMP, DEVICE varchar(64), TYPE varchar(64), EVENT varchar(512), READING varchar(64), VALUE varchar(128), UNIT varchar(32));\
-    CREATE TABLE 'current' (TIMESTAMP TIMESTAMP, DEVICE varchar(64), TYPE varchar(64), EVENT varchar(512), READING varchar(64), VALUE varchar(128), UNIT varchar(32));\
-    CREATE INDEX Search_Idx ON 'history' (DEVICE, READING, TIMESTAMP);"\
-    | sqlite3 /opt/fhem/log/logDB.db;
-
-#&& sed -i "1iattr global nofork 1" /opt/fhem/fhem.cfg \
-#RUN sed -i 's/updateInBackground.*$/updateInBackground 0\r\nattr global nofork 1/' /opt/fhem/fhem.cfg \
-#RUN sed -i 's/attr global logfile.*$/attr global logfile -/' /opt/fhem/fhem.cfg \
-
 RUN sed -i '/global nofork/d' /opt/fhem/fhem.cfg \
-	&& sed -i "1iattr global nofork 1" /opt/fhem/fhem.cfg \
-	&& echo '\ndefine InstallRoutine notify global:INITIALIZED sleep 1;;delete InstallRoutine;;save;;configdb migrate;;sleep 1;;shutdown' >> /opt/fhem/fhem.cfg  \
-	&& perl fhem.pl -d fhem.cfg | tee /opt/fhem/log/fhem_sqlite_install.log;
+	&& sed -i "1iattr global nofork 1" /opt/fhem/fhem.cfg
 
-RUN mkdir /opt/fhemorigin && mv /opt/fhem/* /opt/fhemorigin && rm /opt/fhemorigin/log/*.log
-ENTRYPOINT ["bash","/entrypoint.sh"]
+ADD ./bin /usr/local/bin
+RUN chmod a+x /usr/local/bin/*
+
+CMD ["fhem-run"]
