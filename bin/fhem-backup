@@ -19,7 +19,7 @@ fi
 echo Start Backup from $FHEMPATH to $BACKUPPATH
 echo Backup File $FILENAME
 
-tar -cjf /backup/backup.tar.bz2 -C /opt/fhem ./
+tar -cjf /backup/$FILENAME -C /opt/fhem ./
 
 echo Export done
 echo You can delete this container if you did not set --rm
