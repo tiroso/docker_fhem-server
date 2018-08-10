@@ -14,20 +14,20 @@ export BACKUPPATH="/backup"
 if [ -z "${FILENAME}" ]; then
   export FILENAME="fhem-backup.tar.bz2"
 fi
-echo +--------------------------------------------------+
-echo + Start Restore 
-echo + - from:        ${FILENAME}
-echo + - to:          ${FHEMPATH}/*
-echo +--------------------------------------------------+
-echo ... Please wait
+echo "+--------------------------------------------------+"
+echo "+ Start Restore "
+echo "+ - from:        ${FILENAME}"
+echo "+ - to:          ${FHEMPATH}/*"
+echo "+--------------------------------------------------+"
+echo "... Please wait"
 
 if [ -e "/backup/${FILENAME}" ]; then
   echo ... Deleting ALL files
   rm -rf ${FHEMPATH}/* ${FHEMPATH}/..?* ${FHEMPATH}/.[!.]*
   echo ... Beginning restore from file
-  tar -C ${FHEMPATH}/ -xjf ${BACKUPPATH}/${FILENAME}"
+  tar -C ${FHEMPATH}/ -xjf ${BACKUPPATH}/${FILENAME}
 fi;
 
-echo +--------------------------------------------------+
-echo + Backup finished - Thanks for use
-echo +--------------------------------------------------+
+echo "+--------------------------------------------------+"
+echo "+ Backup finished - Thanks for use"
+echo "+--------------------------------------------------+"
