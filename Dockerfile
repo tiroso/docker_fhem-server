@@ -45,6 +45,7 @@ RUN pkill -f "fhem.pl" \
 	&& update-rc.d -f fhem remove \
 	&& userdel fhem \
 	&& rm /opt/fhem/log/*.log \
+	&& mkdir /backup \
 	&& usermod -aG dialout root \
 	&& chmod -R a+w /opt \
 	&& chown -R root:dialout /opt \ 
