@@ -13,7 +13,7 @@ export FILEPATH="configDB.conf"
 
 echo "+--------------------------------------------------+"
 echo "+ Creating ${FHEMPATH}/${FILEPATH}"
-echo "+ - Press Enter to set the default Values
+echo "+ - Press Enter to set the default Values"
 echo "+--------------------------------------------------+"
 
 if [ -z "${DBCONNECTION}" ]; then
@@ -39,7 +39,7 @@ fi
 
 echo > ${FHEMPATH}/${FILEPATH}
 echo '%dbconfig= (' > ${FHEMPATH}/${FILEPATH}
-echo '	connection => "SQLite:dbname=/opt/fhem/configDB.db",' >> ${FHEMPATH}/${FILEPATH}
+echo '	connection => "SQLite:dbname='"${FHEMPATH}"'/configDB.db",' >> ${FHEMPATH}/${FILEPATH}
 echo '	user => "",' >> ${FHEMPATH}/${FILEPATH}
 echo '	password => ""' >> ${FHEMPATH}/${FILEPATH}
 echo ');' >> ${FHEMPATH}/${FILEPATH}
