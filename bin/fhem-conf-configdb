@@ -40,8 +40,11 @@ fi
 echo > ${FHEMPATH}/${FILEPATH}
 echo '%dbconfig= (' > ${FHEMPATH}/${FILEPATH}
 echo '	connection => "'"${DBCONNECTION}"'",' >> ${FHEMPATH}/${FILEPATH}
-echo '	user => "",' >> ${FHEMPATH}/${FILEPATH}
-echo '	password => ""' >> ${FHEMPATH}/${FILEPATH}
+echo '	user => "'"${DBUSER}"'",' >> ${FHEMPATH}/${FILEPATH}
+echo '	password => "'"${DBPASSWORD}"'"' >> ${FHEMPATH}/${FILEPATH}
 echo ');' >> ${FHEMPATH}/${FILEPATH}
 
 cat ${FHEMPATH}/${FILEPATH}
+echo "+--------------------------------------------------+"
+echo "+ Finished configDB.conf creation. Thanks for using"
+echo "+--------------------------------------------------+"
