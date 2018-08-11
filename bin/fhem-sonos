@@ -1,0 +1,31 @@
+#!/bin/bash
+
+#
+# Starting SONOS based on pm Files
+#
+
+if [ "$DEBUG" == "1" ]; then
+    set -x
+fi
+
+if [ -z "${SONOSPORT}" ]; then
+  export SONOSPORT="4711"
+fi
+
+if [ -z "${SONOSCHECKINTERVAL}" ]; then
+  export SONOSCHECKINTERVAL="30"
+fi
+
+if [ -z "${SONOSSUBWAIT}" ]; then
+  export SONOSSUBWAIT="8"
+fi
+
+if [ -z "${SONOSDELAY}" ]; then
+  export SONOSDELAY="5"
+fi
+
+echo "+--------------------------------------------------+"
+echo "+ Starting Sonos"
+echo "+--------------------------------------------------+"
+
+perl /opt/fhem/FHEM/00_SONOS.pm ${SONOSPORT} ${SONOSCHECKINTERVAL} ${SONOSSUBWAIT} ${SONOSDELAY};
