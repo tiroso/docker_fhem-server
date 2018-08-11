@@ -17,12 +17,10 @@ echo "+ - Press Enter to set the default Values"
 echo "+--------------------------------------------------+"
 
 if [ -z "${DBCONNECTION}" ]; then
-  read -p "DB Connection String (SQLite:dbname=/opt/fhem/configDB.db): " dbconnection
+  read -p "DB Connection String (SQLite:dbname=/opt/fhem/configDB.db): " DBCONNECTION
 fi
-if [ -z "${dbconnection}" ]; then
+if [ -z "${DBCONNECTION}" ]; then
     export DBCONNECTION="SQLite:dbname=/opt/fhem/configDB.db"
-else
-    export DBCONNECTION="${DBCONNECTION}"
 fi
 
 if [ -z "${DBUSER}" ]; then
@@ -41,7 +39,7 @@ fi
 
 echo > ${FHEMPATH}/${FILEPATH}
 echo '%dbconfig= (' > ${FHEMPATH}/${FILEPATH}
-echo '	connection => "SQLite:dbname='"${FHEMPATH}"'/configDB.db",' >> ${FHEMPATH}/${FILEPATH}
+echo '	connection => "'"${DBCONNECTION}"'",' >> ${FHEMPATH}/${FILEPATH}
 echo '	user => "",' >> ${FHEMPATH}/${FILEPATH}
 echo '	password => ""' >> ${FHEMPATH}/${FILEPATH}
 echo ');' >> ${FHEMPATH}/${FILEPATH}
