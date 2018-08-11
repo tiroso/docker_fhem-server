@@ -16,7 +16,7 @@ cd ${FHEMPATH}
 
 echo "+--------------------------------------------------+" | tee /opt/fhem/log/fhem_configdb_migrate.log;
 echo "+ Migrate from fhem.cfg to configDB" | tee /opt/fhem/log/fhem_configdb_migrate.log;
-echo "+--------------------------------------------------+" | tee /opt/fhem/log/fhem_configdb_migrate.log;
+echo "+--------------------------------------------------+\n" | tee /opt/fhem/log/fhem_configdb_migrate.log;
 echo "+---------------Content ${FILECONFIGDB}--------------+" | tee /opt/fhem/log/fhem_configdb_migrate.log;
 cat ${FILECONFIGDB} | tee /opt/fhem/log/fhem_configdb_migrate.log;
 echo "+--------------------------------------------------+" | tee /opt/fhem/log/fhem_configdb_migrate.log;
