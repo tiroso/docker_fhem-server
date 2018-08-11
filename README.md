@@ -1,5 +1,5 @@
-# docker_fhem-server</h1>
-## Build Image</h2>
+# docker_fhem-server
+## Build Image
 ```
 docker build https://github.com/tiroso/docker_fhem-server.git#v5.8 --tag tiroso/fhem-server:v5.8 --tag tiroso/fhem-server:v5.8
 ```
@@ -8,33 +8,46 @@ I've compiled this Image on an amd64 and Raspberry Pi. Also you can pull "amd64"
 ```
 docker pull tiroso/fhem-server:(rpi|amd64)-(v5.8|latest)
 ```
-## Create Container
-#### Without persistent Data
+## Preparations for your FHEM Server
+First of all...Lets set some environment variables to make the copy&paste simple and quick (on host)
+you can choose by:
 ```
-docker run --restart always -d --name fhem-server -h fhem-server -e "TZ=Europe/Berlin" --publish "8083:8083" tiroso/fhem-server:<arch>-v5.8 (configdb)
+export FHEMPLATFORM="rpi" | "amd64"
+export FHEMVERSION="v5.8" | "latest"
+export FHEMVOLUME="fhem-server"
 ```
-#### With persistent Data
+To make your data persistent you have to create a volume for the fhem-server.
 ```
-docker volume create fhem-server
- docker run --restart always -d --name fhem-server -h fhem-server -v fhem-server:/opt/fhem -e "TZ=Europe/Berlin" --publish "8083:8083" tiroso/fhem-server:(rpi|amd64)-(v5.8|latest) (configdb)
+docker volume create ${FHEMVOLUME}
+```
+If you __never__ started a FHEM Server before you have to run an Init Start. This takes a little time to update the FHEM Installation to the newest Update
+```
+docker run --rm -v ${FHEMVOLUME}:/opt/fhem tiroso/fhem-server:${FHEMPLATFORM}-${FHEMVERSION} fhem-init
+```
+If you want to run configDB instead of fhem.cfg you could modify the configDB.conf. For the default settings there is created an empty SQLite Dbase.. Use this command to edit configdb.conf
+```
+docker run --rm -it -v ${FHEMVOLUME}:/opt/fhem tiroso/fhem-server:${FHEMPLATFORM}-${FHEMVERSION} fhem-conf-configdb
+```
+if you __never__ run FHEM with configDB before you have to run a migration from fhem.cfg to configDB. __Do not run__ this command if you have a running dbase.
+```
+docker run --rm -it -v ${FHEMVOLUME}:/opt/fhem tiroso/fhem-server:${FHEMPLATFORM}-${FHEMVERSION} fhem-configdb-migrate
+```
+### Running
+Now you can run the FHEM-Server.
+To run _configDB_ or _fhem.cfg_ you can change an environment var. Without an env var the FHEM-Server will be started with fhem-cfg.
+* FHEMMODE=FHEMCFG
+* FHEMMODE=CONFIGDB
+```
+ docker run --restart always -d --name fhem-server-dev -h fhem-server-dev -e "FHEMMODE=FHEMCFG" -v ${FHEMVOLUME}:/opt/fhem -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro -p "8583:8083" tiroso/fhem-server:${FHEMPLATFORM}-${FHEMVERSION} fhem-run
  ```
-If you set up your Server with persistent Data, it is actually as you updated it. For the first time you started the Container and you have no data it creates an Up to Date FHEM Server.
-
-If you start the container with configdb as CMD it starts the first time with the sqlite database. You can edit the /opt/fhem/configDB.conf or /opt/fhem/logDB.conf for other databases. Restart the container...and you have the new database. 
-
-If you want to migrate from fhem.cfg to configdb you have to start the container without further commands. Then you can set a "configdb migrate" and the Server migrates your Data to the database you specify in your configDB.conf
 ## Backup FHEM Server
-First you have to create a backup folder:
+This command will create a backup _fhem-backup.tar.bz2_ in your Home Directory
 ```
-mkdir $PWD/fhem-server-backup
+docker run -it --rm -v ${FHEMVOLUME}:/opt/fhem -v $PWD:/backup tiroso/fhem-server:${FHEMPLATFORM}-${FHEMVERSION} fhem-backup
 ```
-Then run the backup in a seperate Docker Container based on alpine<br>
+## Restore FHEM Server
+This command extract all Files from _fhem-backup.tar.bz2_ in your Home Directory to _/opt/fhem_ in your container...bzw. to your volume
 ```
-docker run -it --rm -v fhem-server:/volume -v $PWD/fhem-server-backup:/backup alpine tar -cjf /backup/backup.tar.bz2 -C /volume ./
-```
-Restore FHEM Server
-Backup your selected backup to the volume
-```
-docker run -it -v fhem-server:/volume -v $PWD/fhem-server-backup:/backup alpine sh -c "rm -rf /volume/* /volume/..?* /volume/.[!.]* ; tar -C /volume/ -xjf /backup/backup.tar.bz2"
+docker run -it --rm -v ${FHEMVOLUME}:/opt/fhem -v $PWD:/backup tiroso/fhem-server:${FHEMPLATFORM}-${FHEMVERSION} fhem-restore
 ```
 For further information visit [my github repository](https://github.com/tiroso/docker_fhem-server)
