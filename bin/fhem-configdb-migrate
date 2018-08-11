@@ -1,0 +1,34 @@
+#!/bin/bash
+
+#
+# Run FHEM Server
+#
+
+if [ "$DEBUG" == "1" ]; then
+    set -x
+fi
+
+export FHEMPATH="/opt/fhem"
+export FILECONFIGDB="configDB.conf"
+export FILEFHEMCFG="fhem.cfg"
+
+cd ${FHEMPATH}
+
+cp /opt/fhem/fhem.cfg /opt/fhem/fhem_configdb_migrate.cfg
+echo 'define InstallRoutine notify global:INITIALIZED sleep 1;;configdb migrate;;sleep 5;;shutdown' >> /opt/fhem/fhem_configdb_migrate.cfg;
+perl fhem.pl -d fhem_configdb_migrate.cfg | tee /opt/fhem/log/fhem_configdb_migrate.log;
+rm fhem_configdb_migrate.cfg
+
+if [ -z "${FHEMMODE}" ]; then
+    export FHEMMODE="FHEMCFG"
+fi
+
+if [ "${FHEMMODE}" = "FHEMCFG" ]; then 
+  echo "Starte FHEM - fhem.cfg";
+  perl fhem.pl fhem.cfg;
+elif [ "${FHEMMODE}" = "CONFIGDB" ]; then 
+  echo "Starte FHEM - configDB";
+  perl fhem.pl configDB;
+else
+  echo "Unknown FHEMMODE. Choose \"FHEMCFG\" or \"CONFIGDB\"";
+fi;
