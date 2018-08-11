@@ -1,0 +1,29 @@
+#!/bin/bash
+
+#
+# Run FHEM Server
+#
+
+if [ "$DEBUG" == "1" ]; then
+    set -x
+fi
+
+export FHEMPATH="/opt/fhem"
+export FILECONFIGDB="configDB.conf"
+export FILEFHEMCFG="fhem.cfg"
+
+cd ${FHEMPATH}
+
+if [ -z "${FHEMMODE}" ]; then
+    export FHEMMODE="FHEMCFG"
+fi
+
+if [ "${FHEMMODE}" = "FHEMCFG" ]; then 
+  echo "Starte FHEM - fhem.cfg";
+  perl fhem.pl configDB;
+elif [ "${FHEMMODE}" = "CONFIGDB" ]; then 
+  echo "Starte FHEM - configDB";
+  perl fhem.pl fhem.cfg;
+else
+  echo "Unknown FHEMMODE. Choose \"FHEMCFG\" or \"CONFIGDB\"";
+fi;
