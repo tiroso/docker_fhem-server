@@ -1,0 +1,5 @@
+# fhem-sonos
+You can run an Fhem-Sonos Container. You need to start this container in networking host mode
+```
+docker run --restart always -d --name fhem-sonos -h fhem-sonos --network host -v ${FHEMVOLUME}:/opt/fhem:ro tiroso/fhem-server:${FHEMPLATFORM}-${FHEMVERSION} fhem-sonos
+```
