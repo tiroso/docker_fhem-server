@@ -57,6 +57,12 @@ RUN pkill -f "fhem.pl" \
 COPY configDB.conf /opt/fhem/configDB.conf
 COPY logDB.conf /opt/fhem/logDB.conf
 
+RUN echo "pragma auto_vacuum=2;" | sqlite3 /opt/fhem/configDB.db \
+    && echo "CREATE TABLE 'history' (TIMESTAMP TIMESTAMP, DEVICE varchar(64), TYPE varchar(64), EVENT varchar(512), READING varchar(64), VALUE varchar(128), UNIT varchar(32));\
+    CREATE TABLE 'current' (TIMESTAMP TIMESTAMP, DEVICE varchar(64), TYPE varchar(64), EVENT varchar(512), READING varchar(64), VALUE varchar(128), UNIT varchar(32));\
+    CREATE INDEX Search_Idx ON 'history' (DEVICE, READING, TIMESTAMP);"\
+    | sqlite3 /opt/fhem/log/logDB.db;
+
 RUN sed -i '/global nofork/d' /opt/fhem/fhem.cfg \
 	&& sed -i "1iattr global nofork 1" /opt/fhem/fhem.cfg
 
