@@ -9,7 +9,7 @@ echo + Init Startup for FHEM
 echo +--------------------------------------------------+
 echo "... Creating Init fhem_init_start.cfg"
 cp /opt/fhem/fhem.cfg /opt/fhem/fhem_init_start.cfg
-RUN sed -i '/global updateInBackground/d' /opt/fhem/fhem_init_start.cfg \
+sed -i '/global updateInBackground/d' /opt/fhem/fhem_init_start.cfg \
 	&& sed -i "1iattr global updateInBackground 0" /opt/fhem/fhem_init_start.cfg
 echo "... Deleting all LOG Files"
 rm /opt/fhem/log/*;
