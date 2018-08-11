@@ -12,7 +12,7 @@ cp /opt/fhem/fhem.cfg /opt/fhem/fhem_init_start.cfg
 echo "... Deleting all LOG Files"
 rm /opt/fhem/log/*;
 echo "... Extending fhem_init_start.cfg by Update Line"
-echo 'define InstallRoutine notify global:INITIALIZED sleep 1;;delete InstallRoutine;;save;;update;;sleep 1;;shutdown' >> /opt/fhem/fhem_init_start.cfg;
+echo 'define InstallRoutine notify global:INITIALIZED sleep 1;;update;;delete InstallRoutine;;save;;sleep 1;;shutdown' >> /opt/fhem/fhem_init_start.cfg;
 echo "... Running Update modified fhem_init_start.cfg"
 cd /opt/fhem
 perl fhem.pl -d fhem_init_start.cfg | tee /opt/fhem/log/fhem_init_start.log;
