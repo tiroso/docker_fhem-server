@@ -26,6 +26,10 @@ fi
 
 echo "+--------------------------------------------------+"
 echo "+ Starting Sonos"
+echo "+ - Port:                ${SONOSPORT}"
+echo "+ - Interval Check:      ${SONOSCHECKINTERVAL}"
+echo "+ - Wait for Subprocess: ${SONOSSUBWAIT}"
+echo "+ - Delay:               ${SONOSDELAY}"
 echo "+--------------------------------------------------+"
 
 perl /opt/fhem/FHEM/00_SONOS.pm ${SONOSPORT} ${SONOSCHECKINTERVAL} ${SONOSSUBWAIT} ${SONOSDELAY};
