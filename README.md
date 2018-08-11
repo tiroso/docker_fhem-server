@@ -1,13 +1,4 @@
 # docker_fhem-server
-## Build Image
-```
-docker build https://github.com/tiroso/docker_fhem-server.git#v5.8 --tag tiroso/fhem-server:v5.8 --tag tiroso/fhem-server:v5.8
-```
-## Pull Image
-I've compiled this Image on an amd64 and Raspberry Pi. Also you can pull "amd64" or "rpi"
-```
-docker pull tiroso/fhem-server:(rpi|amd64)-(v5.8|latest)
-```
 ## Preparations for your FHEM Server
 First of all...Lets set some environment variables to make the copy&paste simple and quick (on host)
 you can choose by:
