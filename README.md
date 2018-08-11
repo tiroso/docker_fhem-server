@@ -29,7 +29,7 @@ To run _configDB_ or _fhem.cfg_ you can change an environment var. Without an en
 * FHEMMODE=FHEMCFG
 * FHEMMODE=CONFIGDB
 ```
- docker run --restart always -d --name fhem-server-dev -h fhem-server-dev -e "FHEMMODE=FHEMCFG" -v ${FHEMVOLUME}:/opt/fhem -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro -p "8583:8083" tiroso/fhem-server:${FHEMPLATFORM}-${FHEMVERSION} fhem-run
+ docker run --restart always -d --name fhem-server -h fhem-server -e "FHEMMODE=FHEMCFG" -v ${FHEMVOLUME}:/opt/fhem -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro -p "8083:8083" tiroso/fhem-server:${FHEMPLATFORM}-${FHEMVERSION} fhem-run
  ```
 ## Backup FHEM Server
 This command will create a backup _fhem-backup.tar.bz2_ in your Home Directory
