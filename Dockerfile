@@ -10,5 +10,4 @@ RUN chmod a+x /usr/local/bin/*
 
 RUN apt-get update \
 	&& apt-get -y install \
-		cpanminus \
-	&& cpanm Net::WebSocket::Server 
+		libwebsockets-dev
