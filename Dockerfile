@@ -9,7 +9,7 @@ ADD ./bin /usr/local/bin
 RUN chmod a+x /usr/local/bin/*
 
 RUN apt-get update \
-	&& apt-get -qqy --no-install-recommends \
+	&& apt-get install -qqy --no-install-recommends \
 		build-essential \
 		cpanminus \
 	&& cpanm Net::WebSocket::Server \
