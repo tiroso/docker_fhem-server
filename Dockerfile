@@ -12,7 +12,7 @@ RUN apt-get update \
 	&& apt-get -y install \
 		build-essential \
 		cpanminus \
-	&& cpanm Net::WebSocket::Server
+	&& cpanm Net::WebSocket::Server \
 	&& apt-get purge -qqy \
         	build-essential \
 		cpanminus \
