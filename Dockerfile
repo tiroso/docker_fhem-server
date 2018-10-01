@@ -10,9 +10,6 @@ RUN apt-get update \
 		build-essential \
 		cpanminus \
 	&& cpanm Net::WebSocket::Server \
-	&& apt-get purge -qqy \
-        	build-essential \
-		cpanminus \
 	&& rm -rf /root/.cpanm \
 	&& apt-get purge -qqy \
 		build-essential \
